@@ -1,13 +1,11 @@
 ---
-title: Git 自学笔记
+title: Git 工作流
 date: 2025-04-01 14:22:00 +0800
 categories: [科研, Git]
 tags: [git]     # TAG names should always be lowercase
 ---
 
-## Git 工作流
-
-### [码农高天](https://www.bilibili.com/video/BV19e4y1q7JJ)
+## [码农高天](https://www.bilibili.com/video/BV19e4y1q7JJ)
 
 1. `git clone` // 到本地
 2. `git checkout -b xxx` 切换至新分支xxx（相当于复制了remote的仓库到本地的xxx分支上
@@ -33,21 +31,3 @@ tags: [git]     # TAG names should always be lowercase
 远端完成更新后
 1. `git branch -d xxx` 删除本地的git分支
 2. `git pull origin master` 再把远端的最新代码拉至本地
-
-## Git 常用命令
-
-### 设置用户名和邮箱
-
-全局
-
-```bash
-git config --global user.name SunSeaLucky
-git config --global user.email sunsealucky@gmail.com
-```
-
-当前工作区
-
-```bash
-git config user.name SunSeaLucky
-git config user.email sunsealucky@gmail.com
-```
