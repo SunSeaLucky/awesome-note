@@ -4,7 +4,7 @@
 
 做实验时发现可以使用 writer.add_text() 配合 pandas 生成参数表：
 
-```Python
+```python
 writer.add_text("profile", pd.DataFrame({
 	"project_name": project_name, 
 	"description": description, 
