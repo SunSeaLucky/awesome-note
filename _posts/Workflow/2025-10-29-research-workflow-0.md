@@ -1,6 +1,6 @@
 ---
 title: 科研工作流
-date: 2025-10-29 14:22:00 +0800
+date: 2025-10-29 11:00:00 +0800
 categories: [科研, 工作流]
 tags: [research, workflow]     # TAG names should always be lowercase
 ---
