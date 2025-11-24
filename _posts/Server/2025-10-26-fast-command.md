@@ -7,9 +7,7 @@ tags: [linux, research]     # TAG names should always be lowercase
 
 ## 代理
 
-### 巨坑之导出代理
-
-在导出代理时，必须大小写全部导出：
+### 导出代理
 
 ```bash
 PORT=7890 && export http_proxy=http://127.0.0.1:$PORT && export https_proxy=http://127.0.0.1:$PORT && export HTTP_PROXY=http://127.0.0.1:$PORT && export HTTPS_RPOXY=http://127.0.0.1:$PORT
@@ -52,7 +50,7 @@ git config --global https.proxy https://127.0.0.1:7891
 
 为什么这个方法，ping 不通 www.baidu.com？ping 是使用的 ICMP 协议，而 SSH 只转发 TCP 流量。
 
-### 想让 VSCode 的 Extension 在远程机器上使用代理？
+### 让 VSCode 的 Extension 在远程机器上使用代理
 
 在远程机器的配置文件中添加：
 
@@ -67,8 +65,16 @@ git config --global https.proxy https://127.0.0.1:7891
 
 ### 生成 SSH 密钥对
 
+指定文件：
+
 ```bash
 ssh-keygen -t ed25519 -C "sunsealucky@gmail.com" -f ~/.ssh/id_ed25519_sunsealucky
+```
+
+不指定文件：
+
+```bash
+ssh-keygen -t ed25519 -C "sunsealucky@gmail.com"
 ```
 
 ### 配置服务器免密登录

@@ -1,5 +1,5 @@
 ---
-title: Python Tricks
+title: Python Trick
 date: 2025-10-31 14:22:00 +0800
 categories: [科研, Python]
 tags: [python, research]     # TAG names should always be lowercase
