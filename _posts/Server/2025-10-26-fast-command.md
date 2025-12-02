@@ -84,22 +84,32 @@ vim ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 chmod 700 ~/.ssh
 ```
-## 数据传输
+## 数据传输：[AList](https://github.com/AlistGo/alist/releases) + [Rclone](https://rclone.org/) + [阿里云盘](https://www.aliyundrive.com/drive/home)
 
-### 数据高速下载方案
+- 配置 AList
 
-#### 方案一：Aria2 + AList + 阿里云盘
-
-1. 配置 AList
+使用一键安装脚本安装。如有超级用户权限，且不是容器环境（需要 systemd）
 
 ```bash
 curl -fsSL "https://alist.nn.ci/v3.sh" -o v3.sh && bash v3.sh
 ```
 
-如果是基于容器的服务器，则无法使用脚本内自带的命令，因为其中包含 systemctl 命令，容器环境无法使用。应当直接：
+但这条命令通常无法成功执行，可以到 [Alist 官方的 GitHub 仓库](https://github.com/AlistGo/alist/releases)下载对应平台的二进制文件，以 Ubuntu 平台为例
+
+```
+wget https://github.com/AlistGo/alist/releases/download/v3.55.0/alist-linux-amd64.tar.gz
+```
+
+如果使用一键安装脚本安装
 
 ```bash
 cd /opt/alist
+```
+
+否则找到你的下载目录，然后设置账号密码
+
+```bash
+chmod +x alist && ./alist admin set 123456789
 ```
 
 启动 AList 服务器
@@ -108,23 +118,45 @@ cd /opt/alist
 ./alist server
 ```
 
-设置账号密码
-
-```bash
-./alist admin set 123456789
-```
-
 进入 http://localhost:5244/ 后，点击下方的管理按钮，添加一个新的阿里云存储。刷新令牌地址。
 
-2. 配置 Aria2
+- 配置 [Rclone](https://rclone.org/)
 
-执行：
+下载二进制文件：
+
+```bash
+curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+unzip rclone-current-linux-amd64.zip
+cd rclone-*-linux-amd64
+```
+
+复制到自己的家目录下：
+
+```bash
+cp rclone ~/bin/
+chmod 755 ~/bin/rclone
+```
+
+按照 Rclone 的[官方文档](https://rclone.org/docs/)配置好 Rclone 或者按照这样的格式配置 Rclone：
+
+```bash
+[ali]
+type = webdav
+url = http://127.0.0.1:5244/dav
+vendor = other
+user = admin
+pass = iIYpMc_TkqqX_bje1_zw0Mp8Hj9XqHtxNg
+```
+
+- （可选）配置 Aria2
+
+执行
 
 ```bash
 sudo apt update && sudo apt install aria2 aria2p
 ```
 
-复制 AList 中需要下载文件的链接，执行：
+复制 AList 中需要下载文件的链接，执行
 
 ```bash
 $URL=<url>
@@ -133,7 +165,7 @@ aria2c --enable-rpc --rpc-listen-all -s 3 -j 3 -c -l download.log -D $URL
 
 其中 -s 3 表示同时下载三个任务，-j 3 表示同时使用三个下载连接，-c 表示断点续传，-l download.log 表示日志文件，-D 表示指定下载目录。
 
-可以通过如下命令查看下载进度：
+可以通过如下命令查看下载进度
 
 ```bash
 aria2p top
